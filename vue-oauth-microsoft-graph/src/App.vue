@@ -1,6 +1,8 @@
 <template>
-  <div id="app">
+  <div>
+    <base-header />
     <HomePage />
+    <base-footer />
   </div>
 </template>
 
