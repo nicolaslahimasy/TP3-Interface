@@ -32,7 +32,8 @@ export default {
 
   data() {
     return {
-      isPending: false
+      isPending: false,
+      numberOfClicks: 0
     }
   }, 
 
@@ -49,15 +50,19 @@ export default {
       const originalOnClick = /** @type {() => Promise<void>} */ (this.$attrs.click || (() => Promise.resolve()));
       this.isPending = true;
 
+      this.numberOfClicks += 1;
+
+
+      const disableTime = 2000 + this.numberOfClicks * 1000; 
+      console.log('Disable time:', disableTime);
+
       originalOnClick()
         .finally(() => {
-         
           setTimeout(() => {
             this.isPending = false;
-          }, 2000); 
+          }, disableTime); 
         });
 
-   
       this.$emit('click');
     }
   }
